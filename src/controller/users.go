@@ -59,7 +59,7 @@ func (u *UsersController) AddUser(c *gin.Context) {
 	})
 }
 
-func (u *UsersController) DeoeteUser(c *gin.Context) {
+func (u *UsersController) DeleteUser(c *gin.Context) {
 	id, err := strconv.Atoi(c.Params.ByName("id"))
 	if err != nil {
 		c.JSON(http.StatusBadRequest, err)

@@ -22,6 +22,6 @@ func Routing(router *gin.Engine, db *gorm.DB) {
 	})
 
 	router.DELETE("/users/:id", func(c *gin.Context) {
-		usersController.DeoeteUser(c)
+		usersController.DeleteUser(c)
 	})
 }
