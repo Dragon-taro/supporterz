@@ -32,6 +32,7 @@ func (u *UsersController) LoadUser(c *gin.Context) {
 	id, err := strconv.Atoi(c.Params.ByName("id"))
 	if err != nil {
 		c.JSON(http.StatusBadRequest, err)
+		return
 	}
 
 	user, err := model.LoadUser(u.DB, id)
