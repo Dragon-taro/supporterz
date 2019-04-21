@@ -1,1 +1,10 @@
-INSERT INTO users (id,name,email) VALUES (1, 'TOM','xxxx@mail.co.jp');
+INSERT INTO users (id, name, email) VALUES (1, 'Mabel Ransome', 'oHL8gtfNaG@mail.co.jp');
+INSERT INTO users (id, name, email) VALUES (2, 'Jake Boyett', 'k9ckKcAj9W@mail.co.jp');
+INSERT INTO users (id, name, email) VALUES (3, 'Veronica Farnham', '219NbFhyT7@mail.co.jp');
+INSERT INTO users (id, name, email) VALUES (4, 'Georgiana Forsyth', 'UVe6pAJhKx@mail.co.jp');
+INSERT INTO users (id, name, email) VALUES (5, 'Roddy Rutherford', 'ugrOVeSMUr@mail.co.jp');
+INSERT INTO users (id, name, email) VALUES (6, 'Shelley Waddington', 'ZEtLhZbgwf@mail.co.jp');
+INSERT INTO users (id, name, email) VALUES (7, 'Andrew Chatwin', 'WpwBgSzwIH@mail.co.jp');
+INSERT INTO users (id, name, email) VALUES (8, 'Shelley Moleyns', 'ye6niVcrDM@mail.co.jp');
+INSERT INTO users (id, name, email) VALUES (9, 'Heloise Whistler', 'tOBSOVf2Nq@mail.co.jp');
+INSERT INTO users (id, name, email) VALUES (10, 'Frankie Gunter', 'khuiglVHRi@mail.co.jp');
