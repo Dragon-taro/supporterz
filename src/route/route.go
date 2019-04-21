@@ -12,4 +12,8 @@ func Routing(router *gin.Engine, db *gorm.DB) {
 	router.GET("/users", func(c *gin.Context) {
 		usersController.LoadUsers(c)
 	})
+
+	router.GET("/users/:id", func(c *gin.Context) {
+		usersController.LoadUser(c)
+	})
 }

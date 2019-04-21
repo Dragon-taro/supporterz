@@ -2,6 +2,7 @@ package controller
 
 import (
 	"net/http"
+	"strconv"
 
 	"github.com/RikiyaFujii/supporterz/src/model"
 	"github.com/gin-gonic/gin"
@@ -22,6 +23,21 @@ func (u *UsersController) LoadUsers(c *gin.Context) {
 	users, err := model.LoadUsers(u.DB)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, err)
+		return
 	}
 	c.JSON(http.StatusOK, users)
+}
+
+func (u *UsersController) LoadUser(c *gin.Context) {
+	id, err := strconv.Atoi(c.Params.ByName("id"))
+	if err != nil {
+		c.JSON(http.StatusBadRequest, err)
+	}
+
+	user, err := model.LoadUser(u.DB, id)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, err)
+		return
+	}
+	c.JSON(http.StatusOK, user)
 }

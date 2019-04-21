@@ -10,11 +10,22 @@ type User struct {
 
 func LoadUsers(db *gorm.DB) (*[]User, error) {
 	users := new([]User)
-	result := db.Find(&users)
+	query := db.Find(&users)
 
-	if result.Error != nil {
-		return nil, result.Error
+	if err := query.Error; err != nil {
+		return nil, err
 	}
 
 	return users, nil
+}
+
+func LoadUser(db *gorm.DB, id int) (*User, error) {
+	user := new(User)
+	query := db.Where("id = ?", id).First(&user)
+
+	if err := query.Error; err != nil {
+		return nil, err
+	}
+
+	return user, nil
 }
