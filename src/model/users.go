@@ -36,3 +36,11 @@ func AddUser(db *gorm.DB, name, email string) error {
 	}
 	return nil
 }
+
+func DeleteUser(db *gorm.DB, id int) error {
+	query := db.Where("id = ?", id).Delete(User{})
+	if err := query.Error; err != nil {
+		return err
+	}
+	return nil
+}

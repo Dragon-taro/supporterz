@@ -17,7 +17,11 @@ func Routing(router *gin.Engine, db *gorm.DB) {
 		usersController.LoadUser(c)
 	})
 
-	router.POST("/user", func(c *gin.Context) {
+	router.POST("/users", func(c *gin.Context) {
 		usersController.AddUser(c)
+	})
+
+	router.DELETE("/users/:id", func(c *gin.Context) {
+		usersController.DeoeteUser(c)
 	})
 }

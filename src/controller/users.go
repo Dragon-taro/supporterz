@@ -46,11 +46,28 @@ func (u *UsersController) LoadUser(c *gin.Context) {
 func (u *UsersController) AddUser(c *gin.Context) {
 	name := c.PostForm("name")
 	email := c.PostForm("email")
-	err := model.AddUser(u.DB, name, email)
-	if err != nil {
+
+	if err := model.AddUser(u.DB, name, email); err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"error": err,
 		})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"status": "OK",
+	})
+}
+
+func (u *UsersController) DeoeteUser(c *gin.Context) {
+	id, err := strconv.Atoi(c.Params.ByName("id"))
+	if err != nil {
+		c.JSON(http.StatusBadRequest, err)
+		return
+	}
+
+	if err = model.DeleteUser(u.DB, id); err != nil {
+		c.JSON(http.StatusInternalServerError, err)
 		return
 	}
 	c.JSON(http.StatusOK, gin.H{
