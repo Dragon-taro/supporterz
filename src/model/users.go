@@ -3,7 +3,7 @@ package model
 import "github.com/jinzhu/gorm"
 
 type User struct {
-	ID    int    `json:"id"`
+	ID    int    `json:"id" gorm:"primary_key"`
 	Name  string `json:"name"`
 	Email string `json:"email"`
 }
@@ -11,7 +11,6 @@ type User struct {
 func LoadUsers(db *gorm.DB) (*[]User, error) {
 	users := new([]User)
 	query := db.Find(&users)
-
 	if err := query.Error; err != nil {
 		return nil, err
 	}
@@ -22,10 +21,18 @@ func LoadUsers(db *gorm.DB) (*[]User, error) {
 func LoadUser(db *gorm.DB, id int) (*User, error) {
 	user := new(User)
 	query := db.Where("id = ?", id).First(&user)
-
 	if err := query.Error; err != nil {
 		return nil, err
 	}
 
 	return user, nil
+}
+
+func AddUser(db *gorm.DB, name, email string) error {
+	user := User{Name: name, Email: email}
+	query := db.Create(&user)
+	if err := query.Error; err != nil {
+		return err
+	}
+	return nil
 }

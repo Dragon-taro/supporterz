@@ -42,3 +42,18 @@ func (u *UsersController) LoadUser(c *gin.Context) {
 	}
 	c.JSON(http.StatusOK, user)
 }
+
+func (u *UsersController) AddUser(c *gin.Context) {
+	name := c.PostForm("name")
+	email := c.PostForm("email")
+	err := model.AddUser(u.DB, name, email)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"error": err,
+		})
+		return
+	}
+	c.JSON(http.StatusOK, gin.H{
+		"status": "OK",
+	})
+}
