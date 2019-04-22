@@ -43,6 +43,7 @@ supporterz/
 
 ### 実行方法
 ``` bash
+$ cd $HOME/go/src/github.com/RikiyaFujii/supporterz
 $ docker-compose up -d
 ```
 
