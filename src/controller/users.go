@@ -59,6 +59,25 @@ func (u *UsersController) AddUser(c *gin.Context) {
 	})
 }
 
+func (u *UsersController) UpdateUser(c *gin.Context) {
+	name := c.PostForm("name")
+	email := c.PostForm("email")
+
+	id, err := strconv.Atoi(c.Params.ByName("id"))
+	if err != nil {
+		c.JSON(http.StatusBadRequest, err)
+		return
+	}
+
+	if err = model.UpdateUser(u.DB, id, name, email); err != nil {
+		c.JSON(http.StatusInternalServerError, err)
+		return
+	}
+	c.JSON(http.StatusOK, gin.H{
+		"status": "OK",
+	})
+}
+
 func (u *UsersController) DeleteUser(c *gin.Context) {
 	id, err := strconv.Atoi(c.Params.ByName("id"))
 	if err != nil {

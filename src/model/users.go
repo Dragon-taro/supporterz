@@ -37,6 +37,15 @@ func AddUser(db *gorm.DB, name, email string) error {
 	return nil
 }
 
+func UpdateUser(db *gorm.DB, id int, name, email string) error {
+	user := new(User)
+	query := db.Model(&user).Where("id = ?", id).Updates(User{Name: name, Email: email})
+	if err := query.Error; err != nil {
+		return err
+	}
+	return nil
+}
+
 func DeleteUser(db *gorm.DB, id int) error {
 	query := db.Where("id = ?", id).Delete(User{})
 	if err := query.Error; err != nil {

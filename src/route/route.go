@@ -21,6 +21,10 @@ func Routing(router *gin.Engine, db *gorm.DB) {
 		usersController.AddUser(c)
 	})
 
+	router.PUT("/users/:id", func(c *gin.Context) {
+		usersController.UpdateUser(c)
+	})
+
 	router.DELETE("/users/:id", func(c *gin.Context) {
 		usersController.DeleteUser(c)
 	})
