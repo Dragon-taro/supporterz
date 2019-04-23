@@ -23,7 +23,6 @@ func (u *UsersController) LoadUsers(c *gin.Context) {
 	users, err := model.LoadUsers(u.DB)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, err)
-		return
 	}
 	c.JSON(http.StatusOK, users)
 }
@@ -33,7 +32,6 @@ func (u *UsersController) LoadUser(c *gin.Context) {
 	user, err := model.LoadUser(u.DB, id)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, err)
-		return
 	}
 	c.JSON(http.StatusOK, user)
 }
@@ -45,7 +43,6 @@ func (u *UsersController) AddUser(c *gin.Context) {
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"error": err,
 		})
-		return
 	}
 
 	c.JSON(http.StatusOK, gin.H{
@@ -59,7 +56,6 @@ func (u *UsersController) UpdateUser(c *gin.Context) {
 
 	if err := model.UpdateUser(u.DB, id, name, email); err != nil {
 		c.JSON(http.StatusInternalServerError, err)
-		return
 	}
 	c.JSON(http.StatusOK, gin.H{
 		"status": "OK",
@@ -71,7 +67,6 @@ func (u *UsersController) DeleteUser(c *gin.Context) {
 
 	if err := model.DeleteUser(u.DB, id); err != nil {
 		c.JSON(http.StatusInternalServerError, err)
-		return
 	}
 	c.JSON(http.StatusOK, gin.H{
 		"status": "OK",
