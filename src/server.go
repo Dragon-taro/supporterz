@@ -15,7 +15,6 @@ func main() {
 		log.Fatalln("Error: ", err)
 	}
 	defer db.Close()
-
 	route.Routing(router, db)
 	router.Run(":8080")
 }

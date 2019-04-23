@@ -4,6 +4,7 @@ import (
 	"net/http"
 	"strconv"
 
+	"github.com/RikiyaFujii/supporterz/src/common"
 	"github.com/RikiyaFujii/supporterz/src/model"
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
@@ -44,8 +45,7 @@ func (u *UsersController) LoadUser(c *gin.Context) {
 }
 
 func (u *UsersController) AddUser(c *gin.Context) {
-	name := c.PostForm("name")
-	email := c.PostForm("email")
+	name, email := common.PostFormBuilder(c)
 
 	if err := model.AddUser(u.DB, name, email); err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{
@@ -60,8 +60,7 @@ func (u *UsersController) AddUser(c *gin.Context) {
 }
 
 func (u *UsersController) UpdateUser(c *gin.Context) {
-	name := c.PostForm("name")
-	email := c.PostForm("email")
+	name, email := common.PostFormBuilder(c)
 
 	id, err := strconv.Atoi(c.Params.ByName("id"))
 	if err != nil {
