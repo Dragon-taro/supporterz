@@ -2,7 +2,6 @@ package controller
 
 import (
 	"net/http"
-	"strconv"
 
 	"github.com/RikiyaFujii/supporterz/src/common"
 	"github.com/RikiyaFujii/supporterz/src/model"
@@ -30,12 +29,7 @@ func (u *UsersController) LoadUsers(c *gin.Context) {
 }
 
 func (u *UsersController) LoadUser(c *gin.Context) {
-	id, err := strconv.Atoi(c.Params.ByName("id"))
-	if err != nil {
-		c.JSON(http.StatusBadRequest, err)
-		return
-	}
-
+	id := common.ToInt(c)
 	user, err := model.LoadUser(u.DB, id)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, err)
@@ -61,14 +55,9 @@ func (u *UsersController) AddUser(c *gin.Context) {
 
 func (u *UsersController) UpdateUser(c *gin.Context) {
 	name, email := common.PostFormBuilder(c)
+	id := common.ToInt(c)
 
-	id, err := strconv.Atoi(c.Params.ByName("id"))
-	if err != nil {
-		c.JSON(http.StatusBadRequest, err)
-		return
-	}
-
-	if err = model.UpdateUser(u.DB, id, name, email); err != nil {
+	if err := model.UpdateUser(u.DB, id, name, email); err != nil {
 		c.JSON(http.StatusInternalServerError, err)
 		return
 	}
@@ -78,13 +67,9 @@ func (u *UsersController) UpdateUser(c *gin.Context) {
 }
 
 func (u *UsersController) DeleteUser(c *gin.Context) {
-	id, err := strconv.Atoi(c.Params.ByName("id"))
-	if err != nil {
-		c.JSON(http.StatusBadRequest, err)
-		return
-	}
+	id := common.ToInt(c)
 
-	if err = model.DeleteUser(u.DB, id); err != nil {
+	if err := model.DeleteUser(u.DB, id); err != nil {
 		c.JSON(http.StatusInternalServerError, err)
 		return
 	}
