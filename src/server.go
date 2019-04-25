@@ -16,5 +16,5 @@ func main() {
 	}
 	defer db.Close()
 	route.Routing(r, db)
-	r.Run(":8080")
+	r.Run(":8000")
 }
