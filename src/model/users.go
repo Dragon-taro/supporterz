@@ -9,46 +9,46 @@ type User struct {
 }
 
 func LoadUsers(db *gorm.DB) (*[]User, error) {
-	users := new([]User)
-	query := db.Find(&users)
-	if err := query.Error; err != nil {
+	u := new([]User)
+	q := db.Find(&u)
+	if err := q.Error; err != nil {
 		return nil, err
 	}
 
-	return users, nil
+	return u, nil
 }
 
 func LoadUser(db *gorm.DB, id int) (*User, error) {
-	user := new(User)
-	query := db.Where("id = ?", id).First(&user)
-	if err := query.Error; err != nil {
+	u := new(User)
+	q := db.Where("id = ?", id).First(&u)
+	if err := q.Error; err != nil {
 		return nil, err
 	}
 
-	return user, nil
+	return u, nil
 }
 
 func AddUser(db *gorm.DB, name, email string) error {
-	user := User{Name: name, Email: email}
-	query := db.Create(&user)
-	if err := query.Error; err != nil {
+	u := User{Name: name, Email: email}
+	q := db.Create(&u)
+	if err := q.Error; err != nil {
 		return err
 	}
 	return nil
 }
 
 func UpdateUser(db *gorm.DB, id int, name, email string) error {
-	user := new(User)
-	query := db.Model(&user).Where("id = ?", id).Updates(User{Name: name, Email: email})
-	if err := query.Error; err != nil {
+	u := new(User)
+	q := db.Model(&u).Where("id = ?", id).Updates(User{Name: name, Email: email})
+	if err := q.Error; err != nil {
 		return err
 	}
 	return nil
 }
 
 func DeleteUser(db *gorm.DB, id int) error {
-	query := db.Where("id = ?", id).Delete(User{})
-	if err := query.Error; err != nil {
+	q := db.Where("id = ?", id).Delete(User{})
+	if err := q.Error; err != nil {
 		return err
 	}
 	return nil

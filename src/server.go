@@ -9,12 +9,12 @@ import (
 )
 
 func main() {
-	router := gin.Default()
+	r := gin.Default()
 	db, err := database.DBConnect()
 	if err != nil {
 		log.Fatalln("Error: ", err)
 	}
 	defer db.Close()
-	route.Routing(router, db)
-	router.Run(":8080")
+	route.Routing(r, db)
+	r.Run(":8080")
 }
