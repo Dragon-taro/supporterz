@@ -1,0 +1,43 @@
+swagger: '2.0'
+info:
+  description: |
+    サポーターズ勉強会で使用するサンプルのAPIです
+  version: 1.0.0
+  title: Supporterz API
+schemes:
+- http
+produces:
+- application/json
+paths:
+  '/users':
+    get:
+      tags:
+      - Supporterz
+      description: ユーザーの一覧を表示
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/SwUserListResponse'
+definitions:
+  SwUserListResponse:
+    type: object
+    required:
+    - users
+    properties:
+      users:
+        type: array
+        items:
+          $ref: '#/definitions/SwUserListRow'
+  SwUserListRow:
+    required:
+    - id
+    - name
+    - email
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+      email:
+        type: string
