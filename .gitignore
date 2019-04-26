@@ -12,3 +12,6 @@
 *.out
 
 /.idea
+
+# swagger
+node_modules/
