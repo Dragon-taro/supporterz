@@ -8,24 +8,27 @@ import (
 
 func Routing(r *gin.Engine, db *gorm.DB) {
 	usersController := controller.NewUsersController(db)
+	v1 := r.Group("/api/v1")
+	{
+		v1.GET("/users", func(c *gin.Context) {
+			usersController.LoadUsers(c)
+		})
 
-	r.GET("/users", func(c *gin.Context) {
-		usersController.LoadUsers(c)
-	})
+		v1.GET("/users/:id", func(c *gin.Context) {
+			usersController.LoadUser(c)
+		})
 
-	r.GET("/users/:id", func(c *gin.Context) {
-		usersController.LoadUser(c)
-	})
+		v1.POST("/users", func(c *gin.Context) {
+			usersController.AddUser(c)
+		})
 
-	r.POST("/users", func(c *gin.Context) {
-		usersController.AddUser(c)
-	})
+		v1.PUT("/users/:id", func(c *gin.Context) {
+			usersController.UpdateUser(c)
+		})
 
-	r.PUT("/users/:id", func(c *gin.Context) {
-		usersController.UpdateUser(c)
-	})
+		v1.DELETE("/users/:id", func(c *gin.Context) {
+			usersController.DeleteUser(c)
+		})
+	}
 
-	r.DELETE("/users/:id", func(c *gin.Context) {
-		usersController.DeleteUser(c)
-	})
 }

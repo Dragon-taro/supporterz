@@ -35,9 +35,7 @@ func (u *UsersController) LoadUser(c *gin.Context) {
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, err)
 	}
-	c.JSON(http.StatusOK, gin.H{
-		"user": user,
-	})
+	c.JSON(http.StatusOK, user)
 }
 
 func (u *UsersController) AddUser(c *gin.Context) {
