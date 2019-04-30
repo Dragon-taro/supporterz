@@ -4,10 +4,12 @@ services:
     image: mysql
     ports:
       - "3306:3306"
+    # 環境変数
     environment:
       MYSQL_DATABASE: sample_db
       MYSQL_USER: user
       MYSQL_PASSWORD: password
       MYSQL_ROOT_PASSWORD: password
+    # データの永続化領域の定義
     volumes:
       - ./docker/mysql/initdb.d:/docker-entrypoint-initdb.d
