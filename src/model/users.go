@@ -14,7 +14,6 @@ func LoadUsers(db *gorm.DB) (*[]User, error) {
 	if err := q.Error; err != nil {
 		return nil, err
 	}
-
 	return u, nil
 }
 
@@ -24,7 +23,6 @@ func LoadUser(db *gorm.DB, id int) (*User, error) {
 	if err := q.Error; err != nil {
 		return nil, err
 	}
-
 	return u, nil
 }
 
