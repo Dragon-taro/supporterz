@@ -7,7 +7,9 @@ import (
 )
 
 func Routing(r *gin.Engine, db *gorm.DB) {
+	// インスタンス
 	usersController := controller.NewUsersController(db)
+	// apiのパスのグルーピング
 	v1 := r.Group("/api/v1")
 	{
 		v1.GET("/users", func(c *gin.Context) {

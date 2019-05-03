@@ -13,6 +13,7 @@ type UsersController struct {
 	DB *gorm.DB
 }
 
+// インスタンス作成
 func NewUsersController(db *gorm.DB) *UsersController {
 	u := new(UsersController)
 	u.DB = db
@@ -24,6 +25,7 @@ func (u *UsersController) LoadUsers(c *gin.Context) {
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, err)
 	}
+	// gin.H: map[string]interface{} を生成
 	c.JSON(http.StatusOK, gin.H{
 		"users": users,
 	})

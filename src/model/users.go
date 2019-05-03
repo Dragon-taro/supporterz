@@ -10,6 +10,7 @@ type User struct {
 
 func LoadUsers(db *gorm.DB) (*[]User, error) {
 	u := new([]User)
+	// SELECT * FROM users;
 	q := db.Find(&u)
 	if err := q.Error; err != nil {
 		return nil, err
@@ -19,6 +20,7 @@ func LoadUsers(db *gorm.DB) (*[]User, error) {
 
 func LoadUser(db *gorm.DB, id int) (*User, error) {
 	u := new(User)
+	// SELECT * from users WHERE id = ?;
 	q := db.Where("id = ?", id).First(&u)
 	if err := q.Error; err != nil {
 		return nil, err
@@ -28,6 +30,7 @@ func LoadUser(db *gorm.DB, id int) (*User, error) {
 
 func AddUser(db *gorm.DB, name, email string) error {
 	u := User{Name: name, Email: email}
+	// INSERT INTO users(name, email) values(name, email)
 	q := db.Create(&u)
 	if err := q.Error; err != nil {
 		return err
@@ -37,6 +40,7 @@ func AddUser(db *gorm.DB, name, email string) error {
 
 func UpdateUser(db *gorm.DB, id int, name, email string) error {
 	u := new(User)
+	// UPDATE FROM users SET name = name, email = email where id = ?
 	q := db.Model(&u).Where("id = ?", id).Updates(User{Name: name, Email: email})
 	if err := q.Error; err != nil {
 		return err
@@ -45,6 +49,7 @@ func UpdateUser(db *gorm.DB, id int, name, email string) error {
 }
 
 func DeleteUser(db *gorm.DB, id int) error {
+	// DELETE FROM users WHERE id = ?
 	q := db.Where("id = ?", id).Delete(User{})
 	if err := q.Error; err != nil {
 		return err
