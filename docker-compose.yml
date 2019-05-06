@@ -2,6 +2,7 @@ version: '3.3'
 services:
   mysql:
     image: mysql
+    # ポートの指定
     ports:
       - "3306:3306"
     # 環境変数
