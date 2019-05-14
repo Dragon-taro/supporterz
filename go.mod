@@ -2,4 +2,7 @@ module github.com/RikiyaFujii/supporterz
 
 go 1.12
 
-require github.com/RikiyaFujii/supporterz/src v0.0.0-20190502142858-31dfe198a2be // indirect
+require (
+	github.com/gin-gonic/gin v1.4.0
+	github.com/jinzhu/gorm v1.9.8
+)
