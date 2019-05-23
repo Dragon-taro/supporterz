@@ -41,7 +41,7 @@ supporterz/
           └ docker-compose.yml
 ```
 
-### 実行方法
+### Dockerの実行
 ``` bash
 $ cd $HOME/go/src/github.com/RikiyaFujii/supporterz
 $ docker-compose up -d
@@ -50,6 +50,11 @@ $ docker-compose up -d
 ### mysqlへの接続
 ``` bash
 # パスワードは"password"
+
+# mysql環境がない人
+docker exec -it supporterz_mysql_1 bash
+
+# mysql環境がある人
 $ mysql --host 127.0.0.1 --port 3306 -u user -p
 ```
 
@@ -59,4 +64,18 @@ $ pwd
   $HOME/go/src/github.com/RikiyaFujii
 $ cd supporterz/src
 $ go run server.go
+```
+
+## Swaggerのインストール
+$ brew install swagger-codegen
+
+## SwaggerUIの起動
+``` bash
+$ pwd
+  $HOME/go/src/githug.com/RikiyaFujii
+$ cd swagger
+$ swagger-codegen generate -i api_document.yaml -l nodejs-server -o doc/
+$ cd doc
+$ npm install
+$ npm start
 ```
